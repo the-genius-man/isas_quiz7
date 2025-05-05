@@ -145,20 +145,16 @@
         let score = 0;
         let userAnswers = {};
 
-        // Load progress from localStorage
+        // Initialize the quiz when page loads
         window.onload = function() {
-            const storedAnswers = localStorage.getItem('mcqUserAnswers');
-            const storedScore = localStorage.getItem('mcqScore');
-            if (storedAnswers) userAnswers = JSON.parse(storedAnswers);
-            if (storedScore) score = parseInt(storedScore);
             renderQuestion();
             updateProgress();
         };
 
-        // Save progress to localStorage
+        // Save progress in memory (no localStorage)
         function saveProgress() {
-            localStorage.setItem('mcqUserAnswers', JSON.stringify(userAnswers));
-            localStorage.setItem('mcqScore', score);
+            // Progress is already saved in userAnswers and score variables
+            // No need to use localStorage in sandboxed environments
         }
 
         // Render current question
@@ -260,8 +256,6 @@
             userAnswers = {};
             score = 0;
             currentQuestionIndex = 0;
-            localStorage.removeItem('mcqUserAnswers');
-            localStorage.removeItem('mcqScore');
             renderQuestion();
         }
     </script>
